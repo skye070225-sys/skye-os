@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SKYE OS</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0b1020">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#0b1020;--card:#151b2f;--card2:#101626;--text:#f5f7fb;--muted:#9da7bd;--line:#26304a;--accent:#7aa2ff;--ok:#61d095;--warn:#ffc76b;--danger:#ff7d8a}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#0a0f1d,#0e1426 55%,#0b1020);color:var(--text)}
+.app{max-width:1180px;margin:auto;padding:18px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.brand h1{font-size:24px;margin:0}.brand p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.pill{background:var(--card);border:1px solid var(--line);padding:8px 10px;border-radius:999px;color:var(--muted);font-size:12px}
+.grid{display:grid;grid-template-columns:1.4fr .8fr;gap:14px}.card{background:rgba(21,27,47,.94);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+h2{font-size:16px;margin:0 0 12px}.hero{padding:20px}.hero .decision{font-size:24px;line-height:1.35;margin:5px 0 8px}.reason{color:var(--muted);font-size:14px;line-height:1.5}
+.list{display:flex;flex-direction:column;gap:10px}.item{display:flex;gap:10px;align-items:flex-start;padding:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px}.num{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:#22315a;color:#cfe0ff;font-weight:700;font-size:12px}.item b{font-size:14px}.item small{display:block;color:var(--muted);margin-top:3px;line-height:1.4}
+.sections{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.mini{min-height:142px}.tag{display:inline-block;padding:5px 8px;border-radius:999px;font-size:11px;margin-right:5px;background:#1e2947;color:#c7d5f5}
+.progress{height:7px;background:#232d45;border-radius:999px;overflow:hidden;margin-top:10px}.progress>i{display:block;height:100%;background:linear-gradient(90deg,#6f98ff,#8cb5ff)}
+.capture{display:flex;gap:8px;margin-top:14px}.capture input{flex:1;background:#0e1526;border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--text)}button{border:0;background:#7aa2ff;color:#081127;font-weight:700;border-radius:12px;padding:0 14px;cursor:pointer}
+.nav{position:sticky;bottom:10px;margin-top:18px;background:rgba(12,18,34,.92);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;padding:8px;display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.nav button{padding:9px 4px;background:transparent;color:var(--muted);font-size:11px}.nav button.active{background:#1e2947;color:white}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.status{font-size:11px;color:var(--muted)}.ok{color:var(--ok)}.warn{color:var(--warn)}
+.integrations{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.integration{padding:10px;border-radius:12px;background:var(--card2);border:1px solid var(--line);font-size:12px}
+.hidden{display:none}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.sections{grid-template-columns:1fr 1fr}.nav{grid-template-columns:repeat(4,1fr)}.decision{font-size:21px!important}}
+@media(max-width:480px){.app{padding:12px}.sections{grid-template-columns:1fr}.capture{flex-direction:column}.capture button{padding:12px}.integrations{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="brand"><h1>SKYE OS <span style="color:#7aa2ff">APP</span></h1><p id="subtitle">あなた専用の意思決定OS</p></div>
+    <div class="pill"><span id="modeTxt">Focus: ON</span> ・ <button onclick="toggleLang()" style="background:none;color:#cfd7e8;padding:0">JA / EN</button></div>
+  </div>
+
+  <div id="todayPage">
+    <div class="grid">
+      <div class="card hero">
+        <div class="tag">AI Decision</div><div class="tag">Today</div>
+        <h2 style="margin-top:12px" id="q">今日、一番重要なのは？</h2>
+        <div class="decision" id="decision">今日の最重要事項を1つ決めて、そこから進める</div>
+        <div class="reason" id="reason">理由：SKYE OSでは、優先順位・プロジェクト・制作・Money・Researchを1つの入口から整理します。</div>
+      </div>
+      <div class="card">
+        <h2 id="brief">Daily Briefing</h2>
+        <div class="list">
+          <div class="item"><div class="num">!</div><div><b>SKYE OS</b><small>今日の重要事項をここから確認・整理</small></div></div>
+          <div class="item"><div class="num">→</div><div><b>今日の次の一手</b><small>公開前チェック → データ → 収益化導線</small></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <div class="row"><h2 id="top3">今日の Top 3</h2><span class="status">DEMO</span></div>
+      <div class="list">
+        <div class="item"><div class="num">1</div><div><b>Today</b><small>今日の最重要事項を1つ決める</small></div></div>
+        <div class="item"><div class="num">2</div><div><b>Builder</b><small>進行中プロジェクトの次の一手を決める</small></div></div>
+        <div class="item"><div class="num">3</div><div><b>Creator</b><small>YouTube・コンテンツ制作を前に進める</small></div></div>
+      </div>
+      <div class="capture"><input id="captureInput" placeholder="タスク・アイデア・決定事項を追加"><button onclick="addCapture()">追加</button></div>
+      <div id="captured" class="list" style="margin-top:10px"></div>
+    </div>
+
+    <div class="sections">
+      <div class="card mini"><h2>Business</h2><span class="tag">News</span><span class="tag">Projects</span><p class="reason">ビジネスニュース・案件・重要タスクをまとめて確認。</p><div class="progress"><i style="width:62%"></i></div></div>
+      <div class="card mini"><h2>Money</h2><span class="tag">Tax</span><span class="tag">Refund</span><p class="reason">支払い・税金・返金・サブスクを一元管理。</p><div class="progress"><i style="width:48%"></i></div></div>
+      <div class="card mini"><h2>Builder</h2><span class="tag">Hawaii Deals</span><span class="tag">Apps</span><p class="reason">MVP → 公開 → 自動化 → 収益化。</p><div class="progress"><i style="width:74%"></i></div></div>
+      <div class="card mini"><h2>Creator</h2><span class="tag">YouTube</span><span class="tag">Manga</span><p class="reason">企画・制作・投稿・再利用を管理。</p><div class="progress"><i style="width:32%"></i></div></div>
+      <div class="card mini"><h2>Life</h2><span class="tag">Family</span><span class="tag">Personal</span><p class="reason">家族・生活・予定・重要な用事。</p><div class="progress"><i style="width:55%"></i></div></div>
+      <div class="card mini"><h2>Integrations</h2><div class="integrations"><div class="integration">Gmail <span class="ok">Ready</span></div><div class="integration">Calendar <span class="ok">Ready</span></div><div class="integration">Drive <span class="ok">Ready</span></div><div class="integration">Hawaii Deals <span class="warn">Link next</span></div></div></div>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button class="active">Today</button><button>Business</button><button>Money</button><button>Builder</button><button>Creator</button><button>Life</button><button>AI Decision</button>
+  </div>
+</div>
+
+<script>
+let lang='ja';
+function addCapture(){
+  const i=document.getElementById('captureInput'); if(!i.value.trim())return;
+  const box=document.getElementById('captured');
+  const el=document.createElement('div'); el.className='item';
+  el.innerHTML='<div class="num">+</div><div><b>'+i.value.replace(/[<>]/g,'')+'</b><small>Captured now</small></div>';
+  box.prepend(el);
+  const items=JSON.parse(localStorage.getItem('skyeCaptures')||'[]'); items.unshift(i.value); localStorage.setItem('skyeCaptures',JSON.stringify(items.slice(0,20))); i.value='';
+}
+function restore(){
+  const box=document.getElementById('captured'); const items=JSON.parse(localStorage.getItem('skyeCaptures')||'[]');
+  items.forEach(v=>{let el=document.createElement('div');el.className='item';el.innerHTML='<div class="num">+</div><div><b>'+v.replace(/[<>]/g,'')+'</b><small>Saved</small></div>';box.appendChild(el)})
+}
+function toggleLang(){
+ lang=lang==='ja'?'en':'ja';
+ if(lang==='en'){
+   subtitle.textContent='Your personal decision OS'; q.textContent='What matters most today?'; decision.textContent='Choose the single most important action for today'; reason.textContent='Reason: SKYE OS is designed to keep priorities, projects, creation, money and research in one command center.'; brief.textContent='Daily Briefing'; top3.textContent='Top 3 Today';
+ }else location.reload();
+}
+restore();
+if ('serviceWorker' in navigator) { window.addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js').catch(()=>{})); }
+</script>
+</body>
+</html>
