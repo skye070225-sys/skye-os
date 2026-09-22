@@ -981,6 +981,7 @@ function renderTasks(category){
 
 
   tasks.forEach((task,index)=>{
+  if(task.done) return;
 
     const el=document.createElement('div');
 
