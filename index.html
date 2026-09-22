@@ -469,8 +469,12 @@ h2{
       </div>
 
       <div id="todayTasks"
-      class="list"
-      style="margin-top:10px"></div>
+class="list"
+style="margin-top:10px"></div>
+
+<div id="todayTop3"
+class="list"
+style="margin-top:10px"></div>
 
     </div>
 
@@ -1027,6 +1031,7 @@ function addTask(category){
   input.value='';
 
   renderTasks(category);
+  if (category === 'today') renderTodayTop3();
 
 }
 
@@ -1040,6 +1045,7 @@ function deleteTask(category,index){
   saveTasks(category,tasks);
 
   renderTasks(category);
+  if (category === 'today') renderTodayTop3();
 
 }
 
@@ -1054,6 +1060,7 @@ function toggleTaskDone(category,index){
   saveTasks(category,tasks);
 
   renderTasks(category);
+  if (category === 'today') renderTodayTop3();
 
 }
 function enterAdd(event,category){
@@ -1134,7 +1141,30 @@ navButtons.forEach(button => {
     }
   });
 });
+function renderTodayTop3() {
+  const box = document.getElementById('todayTop3');
+  if (!box) return;
 
+  const tasks = getTasks('today').filter(task => !task.done).slice(0, 3);
+
+  box.innerHTML = '';
+
+  tasks.forEach((task, index) => {
+    const el = document.createElement('div');
+    el.className = 'item';
+
+    el.innerHTML =
+      '<div class="num">' + (index + 1) + '</div>' +
+      '<div style="flex:1">' +
+      '<b>' + escapeHTML(task.text) + '</b>' +
+      '<small>' + escapeHTML(task.date) + '</small>' +
+      '</div>';
+
+    box.appendChild(el);
+  });
+}
+
+renderTodayTop3();
 </script>
 
 </body>
