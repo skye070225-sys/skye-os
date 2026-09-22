@@ -983,14 +983,19 @@ function renderTasks(category){
     el.className='item';
 
     el.innerHTML=
-    '<div class="num">+</div>'+
-    '<div style="flex:1">'+
-    '<b>'+escapeHTML(task.text)+'</b>'+
-    '<small>'+escapeHTML(task.date)+'</small>'+
-    '</div>'+
-    '<button class="delete" '+
-    'onclick="deleteTask(\''+
-    category+'\','+index+')">×</button>';
+'<div class="num" onclick="toggleTaskDone(\''+
+category+'\','+index+')" style="cursor:pointer">'+
+(task.done?'✓':'+')+
+'</div>'+
+'<div style="flex:1;cursor:pointer" onclick="toggleTaskDone(\''+
+category+'\','+index+')">'+
+'<b style="'+(task.done?'text-decoration:line-through;opacity:.55':'')+'">'+
+escapeHTML(task.text)+'</b>'+
+'<small>'+escapeHTML(task.date)+'</small>'+
+'</div>'+
+'<button class="delete" '+
+'onclick="deleteTask(\''+
+category+'\','+index+')">×</button>';
 
     box.appendChild(el);
 
@@ -1038,7 +1043,19 @@ function deleteTask(category,index){
 
 }
 
+function toggleTaskDone(category,index){
 
+  const tasks=getTasks(category);
+
+  if(!tasks[index]) return;
+
+  tasks[index].done=!tasks[index].done;
+
+  saveTasks(category,tasks);
+
+  renderTasks(category);
+
+}
 function enterAdd(event,category){
 
   if(event.key==='Enter'){
