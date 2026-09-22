@@ -1081,6 +1081,43 @@ if('serviceWorker' in navigator){
 
 }
 
+// ===== SKYE OS NAVIGATION =====
+const navButtons = document.querySelectorAll('.nav button');
+
+navButtons.forEach(button => {
+  button.addEventListener('click', function () {
+    navButtons.forEach(btn => btn.classList.remove('active'));
+    this.classList.add('active');
+
+    const section = this.textContent.trim();
+
+    if (section === 'Today') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const cards = document.querySelectorAll('.sections .card');
+
+    for (const card of cards) {
+      const title = card.querySelector('h2');
+      if (title && title.textContent.trim() === section) {
+        card.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+        return;
+      }
+    }
+
+    if (section === 'AI Decision') {
+      document.querySelector('.hero').scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+  });
+});
+
 </script>
 
 </body>
