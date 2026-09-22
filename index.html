@@ -4,101 +4,1084 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SKYE OS APP</title>
+
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0b1020">
 <link rel="apple-touch-icon" href="icon-192.png">
+
 <style>
-:root{--bg:#0b1020;--card:#151b2f;--card2:#101626;--text:#f5f7fb;--muted:#9da7bd;--line:#26304a;--accent:#7aa2ff;--ok:#61d095;--warn:#ffc76b;--danger:#ff7d8a}
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#0a0f1d,#0e1426 55%,#0b1020);color:var(--text)}
-.app{max-width:1180px;margin:auto;padding:18px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-.brand h1{font-size:24px;margin:0}.brand p{margin:4px 0 0;color:var(--muted);font-size:13px}
-.pill{background:var(--card);border:1px solid var(--line);padding:8px 10px;border-radius:999px;color:var(--muted);font-size:12px}
-.grid{display:grid;grid-template-columns:1.4fr .8fr;gap:14px}.card{background:rgba(21,27,47,.94);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
-h2{font-size:16px;margin:0 0 12px}.hero{padding:20px}.hero .decision{font-size:24px;line-height:1.35;margin:5px 0 8px}.reason{color:var(--muted);font-size:14px;line-height:1.5}
-.list{display:flex;flex-direction:column;gap:10px}.item{display:flex;gap:10px;align-items:flex-start;padding:12px;background:var(--card2);border:1px solid var(--line);border-radius:14px}.num{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:#22315a;color:#cfe0ff;font-weight:700;font-size:12px}.item b{font-size:14px}.item small{display:block;color:var(--muted);margin-top:3px;line-height:1.4}
-.sections{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.mini{min-height:142px}.tag{display:inline-block;padding:5px 8px;border-radius:999px;font-size:11px;margin-right:5px;background:#1e2947;color:#c7d5f5}
-.progress{height:7px;background:#232d45;border-radius:999px;overflow:hidden;margin-top:10px}.progress>i{display:block;height:100%;background:linear-gradient(90deg,#6f98ff,#8cb5ff)}
-.capture{display:flex;gap:8px;margin-top:14px}.capture input{flex:1;background:#0e1526;border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--text)}button{border:0;background:#7aa2ff;color:#081127;font-weight:700;border-radius:12px;padding:0 14px;cursor:pointer}
-.nav{position:sticky;bottom:10px;margin-top:18px;background:rgba(12,18,34,.92);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:16px;padding:8px;display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.nav button{padding:9px 4px;background:transparent;color:var(--muted);font-size:11px}.nav button.active{background:#1e2947;color:white}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.status{font-size:11px;color:var(--muted)}.ok{color:var(--ok)}.warn{color:var(--warn)}
-.integrations{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.integration{padding:10px;border-radius:12px;background:var(--card2);border:1px solid var(--line);font-size:12px}
-.hidden{display:none}
-@media(max-width:760px){.grid{grid-template-columns:1fr}.sections{grid-template-columns:1fr 1fr}.nav{grid-template-columns:repeat(4,1fr)}.decision{font-size:21px!important}}
-@media(max-width:480px){.app{padding:12px}.sections{grid-template-columns:1fr}.capture{flex-direction:column}.capture button{padding:12px}.integrations{grid-template-columns:1fr}}
+:root{
+  --bg:#0b1020;
+  --card:#151b2f;
+  --card2:#101626;
+  --text:#f5f7fb;
+  --muted:#9da7bd;
+  --line:#26304a;
+  --accent:#7aa2ff;
+  --ok:#61d095;
+  --warn:#ffc76b;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:linear-gradient(180deg,#0a0f1d,#0e1426 55%,#0b1020);
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,input{font:inherit}
+
+.app{
+  max-width:1180px;
+  margin:auto;
+  padding:18px;
+  padding-bottom:100px;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.brand h1{
+  font-size:24px;
+  margin:0;
+}
+
+.brand p{
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.pill{
+  background:var(--card);
+  border:1px solid var(--line);
+  padding:8px 10px;
+  border-radius:999px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.card{
+  background:rgba(21,27,47,.94);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.18);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1.4fr .8fr;
+  gap:14px;
+}
+
+h2{
+  font-size:18px;
+  margin:0 0 12px;
+}
+
+.hero{
+  padding:20px;
+}
+
+.hero .decision{
+  font-size:24px;
+  line-height:1.35;
+  margin:8px 0;
+}
+
+.reason{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55;
+}
+
+.tag{
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:999px;
+  font-size:11px;
+  margin-right:5px;
+  background:#1e2947;
+  color:#c7d5f5;
+}
+
+.list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.item{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:12px;
+  background:var(--card2);
+  border:1px solid var(--line);
+  border-radius:14px;
+}
+
+.num{
+  min-width:28px;
+  height:28px;
+  border-radius:8px;
+  display:grid;
+  place-items:center;
+  background:#22315a;
+  color:#cfe0ff;
+  font-weight:700;
+  font-size:12px;
+}
+
+.item b{
+  font-size:14px;
+}
+
+.item small{
+  display:block;
+  color:var(--muted);
+  margin-top:3px;
+  line-height:1.4;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.status{
+  font-size:11px;
+  color:var(--muted);
+}
+
+.capture{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+.capture input{
+  flex:1;
+  background:#0e1526;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px;
+  color:var(--text);
+  outline:none;
+}
+
+.capture input:focus{
+  border-color:var(--accent);
+}
+
+.action{
+  border:0;
+  background:var(--accent);
+  color:#081127;
+  font-weight:700;
+  border-radius:12px;
+  padding:0 16px;
+  cursor:pointer;
+}
+
+.action:hover{
+  opacity:.9;
+}
+
+.delete{
+  margin-left:auto;
+  border:0;
+  background:transparent;
+  color:#9da7bd;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.sections{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:14px;
+}
+
+.mini{
+  min-height:142px;
+  cursor:pointer;
+  transition:.15s;
+}
+
+.mini:hover{
+  transform:translateY(-2px);
+  border-color:#43547d;
+}
+
+.progress{
+  height:7px;
+  background:#232d45;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:10px;
+}
+
+.progress>i{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,#6f98ff,#8cb5ff);
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.categoryHero{
+  margin-bottom:14px;
+}
+
+.categoryHero h2{
+  font-size:25px;
+  margin-bottom:7px;
+}
+
+.categoryGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.bigCard{
+  min-height:220px;
+}
+
+.nav{
+  position:fixed;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:12px;
+  width:min(1140px,calc(100% - 24px));
+  background:rgba(12,18,34,.94);
+  backdrop-filter:blur(16px);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:8px;
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+  z-index:50;
+}
+
+.nav button{
+  border:0;
+  border-radius:11px;
+  padding:10px 4px;
+  background:transparent;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.nav button.active{
+  background:#1e2947;
+  color:white;
+}
+
+.empty{
+  color:var(--muted);
+  font-size:13px;
+  padding:8px 2px;
+}
+
+.ok{color:var(--ok)}
+.warn{color:var(--warn)}
+
+.integrations{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+}
+
+.integration{
+  padding:10px;
+  border-radius:12px;
+  background:var(--card2);
+  border:1px solid var(--line);
+  font-size:12px;
+}
+
+@media(max-width:760px){
+  .grid,.categoryGrid{
+    grid-template-columns:1fr;
+  }
+
+  .sections{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .nav{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .hero .decision{
+    font-size:21px;
+  }
+}
+
+@media(max-width:480px){
+  .app{padding:12px;padding-bottom:130px}
+  .sections{grid-template-columns:1fr}
+  .capture{flex-direction:column}
+  .action{padding:12px}
+  .integrations{grid-template-columns:1fr}
+}
 </style>
 </head>
+
 <body>
+
 <div class="app">
+
   <div class="top">
-    <div class="brand"><h1>SKYE OS <span style="color:#7aa2ff">APP</span></h1><p id="subtitle">あなた専用の意思決定OS</p></div>
-    <div class="pill"><span id="modeTxt">Focus: ON</span> ・ <button onclick="toggleLang()" style="background:none;color:#cfd7e8;padding:0">JA / EN</button></div>
+    <div class="brand">
+      <h1>SKYE OS <span style="color:#7aa2ff">APP</span></h1>
+      <p id="subtitle">あなた専用の意思決定OS</p>
+    </div>
+
+    <div class="pill">
+      Focus: ON ・
+      <button onclick="toggleLang()"
+      style="background:none;border:0;color:#cfd7e8;font-weight:700;cursor:pointer">
+      JA / EN
+      </button>
+    </div>
   </div>
 
-  <div id="todayPage">
+
+  <!-- TODAY -->
+  <section id="today" class="page active">
+
     <div class="grid">
+
       <div class="card hero">
-        <div class="tag">AI Decision</div><div class="tag">Today</div>
-        <h2 style="margin-top:12px" id="q">今日、一番重要なのは？</h2>
-        <div class="decision" id="decision">今日の最重要事項を1つ決めて、そこから進める</div>
-        <div class="reason" id="reason">理由：SKYE OSでは、優先順位・プロジェクト・制作・Money・Researchを1つの入口から整理します。</div>
+        <span class="tag">AI Decision</span>
+        <span class="tag">Today</span>
+
+        <h2 style="margin-top:12px">
+          今日、一番重要なのは？
+        </h2>
+
+        <div class="decision">
+          今日の最重要事項を1つ決めて、そこから進める
+        </div>
+
+        <div class="reason">
+          SKYE OSでは、Business・Money・Builder・Creator・Lifeを
+          1つの場所で整理し、次の行動を明確にします。
+        </div>
       </div>
+
+
       <div class="card">
-        <h2 id="brief">Daily Briefing</h2>
+        <h2>Daily Briefing</h2>
+
         <div class="list">
-          <div class="item"><div class="num">!</div><div><b>SKYE OS</b><small>今日の重要事項をここから確認・整理</small></div></div>
-          <div class="item"><div class="num">→</div><div><b>今日の次の一手</b><small>公開前チェック → データ → 収益化導線</small></div></div>
+
+          <div class="item">
+            <div class="num">!</div>
+            <div>
+              <b>SKYE OS</b>
+              <small>今日の重要事項を確認・整理</small>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="num">→</div>
+            <div>
+              <b>今日の次の一手</b>
+              <small>確認 → 判断 → 実行</small>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="card" style="margin-top:14px">
+
+      <div class="row">
+        <h2>今日の Top 3</h2>
+        <span class="status">LIVE</span>
+      </div>
+
+      <div class="list">
+
+        <div class="item">
+          <div class="num">1</div>
+          <div>
+            <b>Today</b>
+            <small>今日の最重要事項を1つ決める</small>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="num">2</div>
+          <div>
+            <b>Builder</b>
+            <small>進行中プロジェクトの次の一手を決める</small>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="num">3</div>
+          <div>
+            <b>Creator</b>
+            <small>YouTube・コンテンツ制作を前に進める</small>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="capture">
+        <input id="todayInput"
+        placeholder="タスク・アイデア・決定事項を追加"
+        onkeydown="enterAdd(event,'today')">
+
+        <button class="action"
+        onclick="addTask('today')">
+        追加
+        </button>
+      </div>
+
+      <div id="todayTasks"
+      class="list"
+      style="margin-top:10px"></div>
+
+    </div>
+
+
+    <div class="sections">
+
+      <div class="card mini" onclick="openPage('business')">
+        <h2>Business</h2>
+        <span class="tag">News</span>
+        <span class="tag">Projects</span>
+        <p class="reason">
+          ビジネスニュース・案件・重要タスク。
+        </p>
+        <div class="progress"><i style="width:62%"></i></div>
+      </div>
+
+      <div class="card mini" onclick="openPage('money')">
+        <h2>Money</h2>
+        <span class="tag">Investing</span>
+        <span class="tag">Tax</span>
+        <p class="reason">
+          投資・税金・支払い・返金を管理。
+        </p>
+        <div class="progress"><i style="width:48%"></i></div>
+      </div>
+
+      <div class="card mini" onclick="openPage('builder')">
+        <h2>Builder</h2>
+        <span class="tag">SKYE OS</span>
+        <span class="tag">Hawaii Deals</span>
+        <p class="reason">
+          アプリ・AI・自動化プロジェクト。
+        </p>
+        <div class="progress"><i style="width:74%"></i></div>
+      </div>
+
+      <div class="card mini" onclick="openPage('creator')">
+        <h2>Creator</h2>
+        <span class="tag">YouTube</span>
+        <span class="tag">Manga</span>
+        <p class="reason">
+          企画・制作・投稿・収益化。
+        </p>
+        <div class="progress"><i style="width:32%"></i></div>
+      </div>
+
+      <div class="card mini" onclick="openPage('life')">
+        <h2>Life</h2>
+        <span class="tag">Family</span>
+        <span class="tag">Personal</span>
+        <p class="reason">
+          家族・生活・予定・重要な用事。
+        </p>
+        <div class="progress"><i style="width:55%"></i></div>
+      </div>
+
+      <div class="card mini" onclick="openPage('ai')">
+        <h2>AI Decision</h2>
+        <span class="tag">Priority</span>
+        <span class="tag">Next Action</span>
+        <p class="reason">
+          情報を整理して次の行動を決める。
+        </p>
+        <div class="progress"><i style="width:80%"></i></div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- BUSINESS -->
+  <section id="business" class="page">
+    <div class="card categoryHero">
+      <span class="tag">BUSINESS</span>
+      <h2>Business Command Center</h2>
+      <p class="reason">
+        ビジネスニュース、会社案件、売上、運営、重要な連絡をここで管理。
+      </p>
+    </div>
+
+    <div class="categoryGrid">
+      <div class="card bigCard">
+        <h2>重要タスク</h2>
+        <div id="businessTasks" class="list"></div>
+        <div class="capture">
+          <input id="businessInput"
+          placeholder="Businessタスクを追加"
+          onkeydown="enterAdd(event,'business')">
+          <button class="action"
+          onclick="addTask('business')">追加</button>
+        </div>
+      </div>
+
+      <div class="card bigCard">
+        <h2>Business Focus</h2>
+        <div class="item">
+          <div class="num">→</div>
+          <div>
+            <b>重要案件を1つ前へ</b>
+            <small>売上・運営・交渉・新規事業から優先順位を決定</small>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="card" style="margin-top:14px">
-      <div class="row"><h2 id="top3">今日の Top 3</h2><span class="status">DEMO</span></div>
-      <div class="list">
-        <div class="item"><div class="num">1</div><div><b>Today</b><small>今日の最重要事項を1つ決める</small></div></div>
-        <div class="item"><div class="num">2</div><div><b>Builder</b><small>進行中プロジェクトの次の一手を決める</small></div></div>
-        <div class="item"><div class="num">3</div><div><b>Creator</b><small>YouTube・コンテンツ制作を前に進める</small></div></div>
+
+  <!-- MONEY -->
+  <section id="money" class="page">
+    <div class="card categoryHero">
+      <span class="tag">MONEY</span>
+      <h2>Money Center</h2>
+      <p class="reason">
+        投資・株式・税金・支払い・返金・資産管理。
+      </p>
+    </div>
+
+    <div class="categoryGrid">
+      <div class="card bigCard">
+        <h2>Money Tasks</h2>
+        <div id="moneyTasks" class="list"></div>
+
+        <div class="capture">
+          <input id="moneyInput"
+          placeholder="Moneyタスクを追加"
+          onkeydown="enterAdd(event,'money')">
+          <button class="action"
+          onclick="addTask('money')">追加</button>
+        </div>
       </div>
-      <div class="capture"><input id="captureInput" placeholder="タスク・アイデア・決定事項を追加"><button onclick="addCapture()">追加</button></div>
-      <div id="captured" class="list" style="margin-top:10px"></div>
+
+      <div class="card bigCard">
+        <h2>Watch</h2>
+
+        <div class="item">
+          <div class="num">$</div>
+          <div>
+            <b>Investing</b>
+            <small>保有銘柄・重要ニュース・資金移動を確認</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- BUILDER -->
+  <section id="builder" class="page">
+    <div class="card categoryHero">
+      <span class="tag">BUILDER</span>
+      <h2>Builder Lab</h2>
+      <p class="reason">
+        SKYE OS、Hawaii Deals、AI、自動化、新規アプリを管理。
+      </p>
     </div>
 
-    <div class="sections">
-      <div class="card mini"><h2>Business</h2><span class="tag">News</span><span class="tag">Projects</span><p class="reason">ビジネスニュース・案件・重要タスクをまとめて確認。</p><div class="progress"><i style="width:62%"></i></div></div>
-      <div class="card mini"><h2>Money</h2><span class="tag">Tax</span><span class="tag">Refund</span><p class="reason">支払い・税金・返金・サブスクを一元管理。</p><div class="progress"><i style="width:48%"></i></div></div>
-      <div class="card mini"><h2>Builder</h2><span class="tag">Hawaii Deals</span><span class="tag">Apps</span><p class="reason">MVP → 公開 → 自動化 → 収益化。</p><div class="progress"><i style="width:74%"></i></div></div>
-      <div class="card mini"><h2>Creator</h2><span class="tag">YouTube</span><span class="tag">Manga</span><p class="reason">企画・制作・投稿・再利用を管理。</p><div class="progress"><i style="width:32%"></i></div></div>
-      <div class="card mini"><h2>Life</h2><span class="tag">Family</span><span class="tag">Personal</span><p class="reason">家族・生活・予定・重要な用事。</p><div class="progress"><i style="width:55%"></i></div></div>
-      <div class="card mini"><h2>Integrations</h2><div class="integrations"><div class="integration">Gmail <span class="ok">Ready</span></div><div class="integration">Calendar <span class="ok">Ready</span></div><div class="integration">Drive <span class="ok">Ready</span></div><div class="integration">Hawaii Deals <span class="warn">Link next</span></div></div></div>
-    </div>
-  </div>
+    <div class="categoryGrid">
+      <div class="card bigCard">
+        <h2>Projects</h2>
 
-  <div class="nav">
-    <button class="active">Today</button><button>Business</button><button>Money</button><button>Builder</button><button>Creator</button><button>Life</button><button>AI Decision</button>
-  </div>
+        <div class="item">
+          <div class="num">S</div>
+          <div>
+            <b>SKYE OS</b>
+            <small>Personal AI Operating System</small>
+          </div>
+        </div>
+
+        <div class="item" style="margin-top:10px">
+          <div class="num">H</div>
+          <div>
+            <b>Hawaii Deals</b>
+            <small>特売データ → 比較 → 自動化 → 収益化</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bigCard">
+        <h2>Next Actions</h2>
+        <div id="builderTasks" class="list"></div>
+
+        <div class="capture">
+          <input id="builderInput"
+          placeholder="Builderタスクを追加"
+          onkeydown="enterAdd(event,'builder')">
+          <button class="action"
+          onclick="addTask('builder')">追加</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CREATOR -->
+  <section id="creator" class="page">
+    <div class="card categoryHero">
+      <span class="tag">CREATOR</span>
+      <h2>Creator Studio</h2>
+      <p class="reason">
+        YouTube・漫画・Shorts・企画・制作・投稿・収益化を管理。
+      </p>
+    </div>
+
+    <div class="categoryGrid">
+      <div class="card bigCard">
+        <h2>Content Pipeline</h2>
+
+        <div class="item">
+          <div class="num">▶</div>
+          <div>
+            <b>YouTube</b>
+            <small>ネタ → 台本 → 画像 → 動画 → 投稿</small>
+          </div>
+        </div>
+
+        <div class="item" style="margin-top:10px">
+          <div class="num">M</div>
+          <div>
+            <b>Manga</b>
+            <small>漫画コンテンツを動画・Shortsへ再利用</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bigCard">
+        <h2>Creator Tasks</h2>
+        <div id="creatorTasks" class="list"></div>
+
+        <div class="capture">
+          <input id="creatorInput"
+          placeholder="Creatorタスクを追加"
+          onkeydown="enterAdd(event,'creator')">
+          <button class="action"
+          onclick="addTask('creator')">追加</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- LIFE -->
+  <section id="life" class="page">
+    <div class="card categoryHero">
+      <span class="tag">LIFE</span>
+      <h2>Life Center</h2>
+      <p class="reason">
+        家族・予定・生活・買い物・個人的な重要事項を整理。
+      </p>
+    </div>
+
+    <div class="categoryGrid">
+      <div class="card bigCard">
+        <h2>Life Tasks</h2>
+        <div id="lifeTasks" class="list"></div>
+
+        <div class="capture">
+          <input id="lifeInput"
+          placeholder="Lifeタスクを追加"
+          onkeydown="enterAdd(event,'life')">
+          <button class="action"
+          onclick="addTask('life')">追加</button>
+        </div>
+      </div>
+
+      <div class="card bigCard">
+        <h2>Focus</h2>
+
+        <div class="item">
+          <div class="num">♥</div>
+          <div>
+            <b>生活全体を見る</b>
+            <small>仕事だけでなく家族・時間・健康・予定も含めて整理</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- AI -->
+  <section id="ai" class="page">
+    <div class="card categoryHero">
+      <span class="tag">AI DECISION</span>
+      <h2>SKYE AI Decision</h2>
+      <p class="reason">
+        Business・Money・Builder・Creator・Lifeの情報から、
+        次に何をするべきか整理する場所です。
+      </p>
+    </div>
+
+    <div class="categoryGrid">
+
+      <div class="card bigCard">
+        <h2>Decision Inbox</h2>
+
+        <div id="aiTasks" class="list"></div>
+
+        <div class="capture">
+          <input id="aiInput"
+          placeholder="迷っていること・判断したいことを入力"
+          onkeydown="enterAdd(event,'ai')">
+
+          <button class="action"
+          onclick="addTask('ai')">
+          追加
+          </button>
+        </div>
+      </div>
+
+
+      <div class="card bigCard">
+        <h2>Decision Framework</h2>
+
+        <div class="list">
+
+          <div class="item">
+            <div class="num">1</div>
+            <div>
+              <b>重要度</b>
+              <small>今やる価値が高いか</small>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="num">2</div>
+            <div>
+              <b>緊急度</b>
+              <small>今日・今週に動く必要があるか</small>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="num">3</div>
+            <div>
+              <b>次の一手</b>
+              <small>具体的に何をすれば前進するか</small>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
 </div>
 
+
+<!-- NAVIGATION -->
+
+<div class="nav">
+
+  <button class="active"
+  data-page="today"
+  onclick="openPage('today')">
+  Today
+  </button>
+
+  <button
+  data-page="business"
+  onclick="openPage('business')">
+  Business
+  </button>
+
+  <button
+  data-page="money"
+  onclick="openPage('money')">
+  Money
+  </button>
+
+  <button
+  data-page="builder"
+  onclick="openPage('builder')">
+  Builder
+  </button>
+
+  <button
+  data-page="creator"
+  onclick="openPage('creator')">
+  Creator
+  </button>
+
+  <button
+  data-page="life"
+  onclick="openPage('life')">
+  Life
+  </button>
+
+  <button
+  data-page="ai"
+  onclick="openPage('ai')">
+  AI Decision
+  </button>
+
+</div>
+
+
 <script>
+
+const categories=[
+  'today',
+  'business',
+  'money',
+  'builder',
+  'creator',
+  'life',
+  'ai'
+];
+
 let lang='ja';
-function addCapture(){
-  const i=document.getElementById('captureInput'); if(!i.value.trim())return;
-  const box=document.getElementById('captured');
-  const el=document.createElement('div'); el.className='item';
-  el.innerHTML='<div class="num">+</div><div><b>'+i.value.replace(/[<>]/g,'')+'</b><small>Captured now</small></div>';
-  box.prepend(el);
-  const items=JSON.parse(localStorage.getItem('skyeCaptures')||'[]'); items.unshift(i.value); localStorage.setItem('skyeCaptures',JSON.stringify(items.slice(0,20))); i.value='';
+
+
+function openPage(page){
+
+  document.querySelectorAll('.page')
+  .forEach(p=>p.classList.remove('active'));
+
+  const target=document.getElementById(page);
+
+  if(target){
+    target.classList.add('active');
+  }
+
+  document.querySelectorAll('.nav button')
+  .forEach(b=>{
+    b.classList.toggle(
+      'active',
+      b.dataset.page===page
+    );
+  });
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
 }
-function restore(){
-  const box=document.getElementById('captured'); const items=JSON.parse(localStorage.getItem('skyeCaptures')||'[]');
-  items.forEach(v=>{let el=document.createElement('div');el.className='item';el.innerHTML='<div class="num">+</div><div><b>'+v.replace(/[<>]/g,'')+'</b><small>Saved</small></div>';box.appendChild(el)})
+
+
+function storageKey(category){
+  return 'skyeOS_'+category+'_tasks';
 }
+
+
+function getTasks(category){
+
+  try{
+    return JSON.parse(
+      localStorage.getItem(storageKey(category)) || '[]'
+    );
+  }catch(e){
+    return [];
+  }
+
+}
+
+
+function saveTasks(category,tasks){
+
+  localStorage.setItem(
+    storageKey(category),
+    JSON.stringify(tasks)
+  );
+
+}
+
+
+function escapeHTML(text){
+
+  return text
+  .replace(/&/g,'&amp;')
+  .replace(/</g,'&lt;')
+  .replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;')
+  .replace(/'/g,'&#039;');
+
+}
+
+
+function renderTasks(category){
+
+  const box=
+  document.getElementById(category+'Tasks');
+
+  if(!box)return;
+
+  const tasks=getTasks(category);
+
+  box.innerHTML='';
+
+  if(tasks.length===0){
+
+    const empty=document.createElement('div');
+
+    empty.className='empty';
+
+    empty.textContent=
+    'まだ登録されていません。';
+
+    box.appendChild(empty);
+
+    return;
+  }
+
+
+  tasks.forEach((task,index)=>{
+
+    const el=document.createElement('div');
+
+    el.className='item';
+
+    el.innerHTML=
+    '<div class="num">+</div>'+
+    '<div style="flex:1">'+
+    '<b>'+escapeHTML(task.text)+'</b>'+
+    '<small>'+escapeHTML(task.date)+'</small>'+
+    '</div>'+
+    '<button class="delete" '+
+    'onclick="deleteTask(\''+
+    category+'\','+index+')">×</button>';
+
+    box.appendChild(el);
+
+  });
+
+}
+
+
+function addTask(category){
+
+  const input=
+  document.getElementById(category+'Input');
+
+  if(!input)return;
+
+  const text=input.value.trim();
+
+  if(!text)return;
+
+  const tasks=getTasks(category);
+
+  tasks.unshift({
+    text:text,
+    date:new Date().toLocaleString('ja-JP')
+  });
+
+  saveTasks(category,tasks.slice(0,50));
+
+  input.value='';
+
+  renderTasks(category);
+
+}
+
+
+function deleteTask(category,index){
+
+  const tasks=getTasks(category);
+
+  tasks.splice(index,1);
+
+  saveTasks(category,tasks);
+
+  renderTasks(category);
+
+}
+
+
+function enterAdd(event,category){
+
+  if(event.key==='Enter'){
+    addTask(category);
+  }
+
+}
+
+
 function toggleLang(){
- lang=lang==='ja'?'en':'ja';
- if(lang==='en'){
-   subtitle.textContent='Your personal decision OS'; q.textContent='What matters most today?'; decision.textContent='Choose the single most important action for today'; reason.textContent='Reason: SKYE OS is designed to keep priorities, projects, creation, money and research in one command center.'; brief.textContent='Daily Briefing'; top3.textContent='Top 3 Today';
- }else location.reload();
+
+  lang=lang==='ja'?'en':'ja';
+
+  const subtitle=
+  document.getElementById('subtitle');
+
+  if(lang==='en'){
+    subtitle.textContent=
+    'Your Personal Decision Operating System';
+  }else{
+    subtitle.textContent=
+    'あなた専用の意思決定OS';
+  }
+
 }
-restore();
-if ('serviceWorker' in navigator) { window.addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js').catch(()=>{})); }
+
+
+categories.forEach(renderTasks);
+
+
+if('serviceWorker' in navigator){
+
+  window.addEventListener('load',()=>{
+
+    navigator.serviceWorker
+    .register('service-worker.js')
+    .catch(()=>{});
+
+  });
+
+}
+
 </script>
+
 </body>
 </html>
